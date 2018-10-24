@@ -2,10 +2,12 @@ import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
 import logger from "redux-logger";
 import { combineReducers } from "redux";
-import { imageData } from "../components/Upload/reducers";
+import { imageData } from "../components/Display/reducers";
+import { imageUploadData } from '../components/Upload/reducers';
 
 const rReducer = combineReducers({
-  imageData
+  imageData,
+  imageUploadData
 });
 
 export const store = createStore(
