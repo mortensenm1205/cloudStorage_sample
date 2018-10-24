@@ -1,4 +1,4 @@
-import { storage } from "../../config/firebase";
+import { fb_storage } from "../../config/firebase";
 
 const downloadImageBegin = () => {
     return {
@@ -26,7 +26,7 @@ const downloadImageError = err => {
 export const downloadImageURL = imageName => {
     return dispatch => {
         dispatch(downloadImageBegin())
-        storage
+        fb_storage
         .ref()
         .child("images/" + imageName)
         .getDownloadURL()

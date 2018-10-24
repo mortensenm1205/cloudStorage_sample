@@ -1,11 +1,4 @@
-import { storage } from "../../config/firebase";
-
-const imageUploadBegin = () => {
-  return {
-    type: "IMAGE_UPLOAD_BEGIN",
-    message: "Starting image reteval"
-  };
-};
+import { fb_storage } from "../../config/firebase";
 
 const imageUploadSuccess = () => {
   return {
@@ -24,12 +17,9 @@ const imageUploadError = err => {
 
 export const imageUpload = fileToUpload => {
   return dispatch => {
-    dispatch(imageUploadBegin());
-    storage
+    fb_storage
       .ref()
       .child("images/" + fileToUpload.name)
-      .put(fileToUpload)
-      .then(() => dispatch(imageUploadSuccess))
-      .catch(err => dispatch(imageUploadError(err)));
+      .put(fileToUpload).then(() => dispatch(imageUploadSuccess)).catch(err => dispatch(imageUploadError(err)));
   };
 };
