@@ -9,19 +9,15 @@ class UploadContainer extends Component {
   };
 
   files = e => {
-    const { upload } = this.props;
-    upload(e.target.files[0]);
+    this.setState({ image: e.target.files[0]});
   };
 
-  // submit = e => {
-  //   const { image } = this.state;
-  //   e.preventDefault();
-  //   storage
-  //     .ref()
-  //     .child("images/" + image.name)
-  //     .put(image)
-  //     .catch(err => console.log(err));
-  // };
+  submit = e => {
+    const { image } = this.state;
+    const { upload } = this.props;
+    e.preventDefault();
+    upload(image)
+  };
 
   render() {
     return (
