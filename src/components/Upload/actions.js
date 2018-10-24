@@ -1,9 +1,17 @@
 import { fb_storage } from "../../config/firebase";
 
-const imageUploadSuccess = () => {
+const imageUploadBegin = () => {
+  return {
+    type: "IMAGE_UPLOAD_BEGIN",
+    message: "Starting image reteval"
+  };
+};
+
+const imageUploadSuccess = imgMetaData => {
   return {
     type: "IMAGE_UPLOAD_SUCCESS",
-    message: "Image uploaded, successfully :)"
+    message: "Image uploaded, successfully :)",
+    imgMetaData
   };
 };
 
@@ -17,9 +25,15 @@ const imageUploadError = err => {
 
 export const imageUpload = fileToUpload => {
   return dispatch => {
+    dispatch(imageUploadBegin());
     fb_storage
       .ref()
       .child("images/" + fileToUpload.name)
-      .put(fileToUpload).then(() => dispatch(imageUploadSuccess)).catch(err => dispatch(imageUploadError(err)));
+      .put(fileToUpload)
+      .then(snap => {
+        console.log(snap)
+        // dispatch(imageUploadSuccess(snap))
+      })
+      .catch(err => dispatch(imageUploadError(err)));
   };
 };

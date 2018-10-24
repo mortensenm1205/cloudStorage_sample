@@ -12,7 +12,7 @@ class DisplayContainer extends Component {
 
     componentDidMount() {
         const { downloadImage, image } = this.props;
-        downloadImage(image.name);
+        downloadImage(image.imgMeta.metadata.name);
     }
 
     render() {
@@ -28,7 +28,7 @@ class DisplayContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        image: state.imageData
+        image: state.imageUploadData
     }
 }
 
