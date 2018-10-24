@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { downloadImageURL } from './actions';
-import Image from './Image';
+import DisplayImage from './Image';
 
 class DisplayContainer extends Component {
 
@@ -10,7 +10,7 @@ class DisplayContainer extends Component {
         imageURLs: ""
     };
 
-    componentWillUpdate() {
+    componentDidMount() {
         const { downloadImage, image } = this.props;
         downloadImage(image.name);
     }
@@ -20,7 +20,7 @@ class DisplayContainer extends Component {
         const { image } = this.props;
         return(
             <div>
-                <Image url={imageURLs} altText={image.name}/>
+                <DisplayImage url={imageURLs} altText={image.name}/>
             </div>
         )
     }
