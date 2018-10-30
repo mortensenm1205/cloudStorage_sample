@@ -1,4 +1,4 @@
-import { fb_storage } from "../../config/firebase";
+import { fb_storage, db } from "../../config/firebase";
 
 const imageUploadBegin = () => {
   return {
@@ -7,11 +7,10 @@ const imageUploadBegin = () => {
   };
 };
 
-const imageUploadSuccess = imgMetaData => {
+const imageUploadSuccess = () => {
   return {
     type: "IMAGE_UPLOAD_SUCCESS",
-    message: "Image uploaded, successfully :)",
-    imgMetaData
+    message: "Image uploaded, successfully :)"
   };
 };
 
@@ -31,8 +30,8 @@ export const imageUpload = fileToUpload => {
       .child("images/" + fileToUpload.name)
       .put(fileToUpload)
       .then(snap => {
-        console.log(snap)
-        // dispatch(imageUploadSuccess(snap))
+        db.collection('storedImages').add({image_name: snap.metadata.name})
+        .then(docRef => console.log(docRef))
       })
       .catch(err => dispatch(imageUploadError(err)));
   };

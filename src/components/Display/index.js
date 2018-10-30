@@ -12,7 +12,7 @@ class DisplayContainer extends Component {
 
     componentDidMount() {
         const { downloadImage, image } = this.props;
-        downloadImage(image.imgMeta.metadata.name);
+        console.log(image);
     }
 
     render() {
